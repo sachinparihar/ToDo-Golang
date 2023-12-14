@@ -3,11 +3,11 @@
 ## How to Run
 
 ```
-git clone github.com/sachinparihar/ToDo-Go
+git clone github.com/sachinparihar/ToDo-Golang.git
 ```
 
 ```
-cd ToDo-Go
+cd ToDo-Golang
 ```
 
 ```
