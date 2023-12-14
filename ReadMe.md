@@ -3,7 +3,7 @@
 ## How to Run
 
 ```
-git clone github.com/sachinparihar/ToDo-Golang.git
+git clone https://github.com/sachinparihar/ToDo-Golang.git
 ```
 
 ```
