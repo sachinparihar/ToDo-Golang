@@ -7,7 +7,7 @@ git clone https://github.com/sachinparihar/ToDo-Golang.git
 ```
 
 ```
-cd ToDo-Golang
+cd ToDo-Golang/backend
 ```
 
 ```
