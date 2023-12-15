@@ -5,26 +5,26 @@
         <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="container max-w-xl mx-auto">
-        <h1 class="font-bold text-2xl my-16">HTMx TODO!</h1>
-
-        <form class="grid grid-cols-7 m-4 gap-2">
-            <input class="col-span-5 input input-bordered" type="text" name="todo" />
-            <button class="btn btn-accent col-span-2" 
-                hx-post="/create" 
-                hx-target="#todos"
-                hx-swap="innerHTML">
-                Create Todo
-            </button>
-        </form>
-
-        <div id="todos" class="my-8">
-            {{ block "Todos" . }}
-            {{ range . }}
-                <div class="grid grid-cols-7 gap-2 mt-4">
-                    <p class="col-span-5 {{if .Done }} line-through {{end}}">
-                        {{.Todo}}
-                    </p>
+    <body class="bg-gradient-to-r from-green-400 to-blue-500 flex flex-col items-center min-h-screen text-white">
+        <h1 class="font-bold text-4xl my-12">ToDo List</h1>
+        <div class="container mx-auto max-w-3xl">
+            <form class="grid grid-cols-7 gap-2">
+                <input class="col-span-5 input input-bordered" type="text" name="todo" placeholder="What needs to be done?" />
+                <button class="btn btn-accent col-span-2 hover:bg-green-600 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" 
+                    hx-post="/create" 
+                    hx-target="#todos"
+                    hx-swap="innerHTML">
+                    Create Todo
+                </button>
+            </form>
+        
+            <div id="todos" class="my-8">
+                {{ block "Todos" . }}
+                {{ range . }}
+                    <div class="grid grid-cols-7 gap-2 mt-4 bg-white rounded-lg shadow-md p-4">
+                        <p class="col-span-5 text-lg {{if .Done }} line-through text-green-500 {{else}} text-gray-800 {{end}}">
+                            {{.Todo}}
+                        </p>
                     <button class="btn btn-success"
                         hx-put="/todo/{{.Id}}"
                         hx-target="#todos"
@@ -42,6 +42,7 @@
             {{ end }}
 
         </div>
+    </div>
 
     </body>
 
