@@ -3,8 +3,10 @@ package model
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -14,10 +16,21 @@ var (
 )
 
 func ConnectToMongoDB() error {
-	clientOptions := options.Client().ApplyURI("mongodb://website.mongo.cosmos.azure.com:10255/?ssl=true&retryWrites=false")
+	// Load .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
+	}
+
+	// Retrieve MongoDB connection details from environment variables
+	mongoURI := os.Getenv("MONGO_URI")
+	mongoUsername := os.Getenv("MONGO_USERNAME")
+	mongoPassword := os.Getenv("MONGO_PASSWORD")
+
+	clientOptions := options.Client().ApplyURI(mongoURI)
 	clientOptions.SetAuth(options.Credential{
-		Username: "website",
-		Password: "8biA4kRmOESvlIDN4IM3gqnqFK69xOZHEsQJtgqCRgzhDzFbEj9EdRYVr0pbOd2EEptdPACfjiwHACDbSsHCGQ==",
+		Username: mongoUsername,
+		Password: mongoPassword,
 	})
 
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
@@ -33,7 +46,7 @@ func ConnectToMongoDB() error {
 		return err
 	}
 
-	db = client.Database("todo-app") // Replace "your-database-name" with your actual database name
+	db = client.Database("todo-app") // Ensure this matches your actual database name
 	log.Println("Connected to MongoDB!")
 	return nil
 }
