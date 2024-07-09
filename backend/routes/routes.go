@@ -145,6 +145,6 @@ func SetupAndRun() {
 	mux.HandleFunc("/todo/{id}", deleteTodo).Methods("DELETE")
 	mux.HandleFunc("/create", createTodo).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":5000", mux))
+	log.Fatal(http.ListenAndServe(":8000", mux))
 
 }

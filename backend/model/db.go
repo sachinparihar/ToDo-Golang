@@ -14,13 +14,13 @@ var (
 )
 
 func ConnectToMongoDB() error {
-	clientOptions := options.Client().ApplyURI("mongodb://todo12.mongo.cosmos.azure.com:10255/?ssl=true&retryWrites=false")
+	clientOptions := options.Client().ApplyURI("mongodb://website.mongo.cosmos.azure.com:10255/?ssl=true&retryWrites=false")
 	clientOptions.SetAuth(options.Credential{
-		Username: "todo12",
-		Password: "SE9LyzkytHMfuwm67pwKnbLWA4iBpnIGK1Nmrd0nRRixI0ffD22Vvc7KrXofmWN8h2c8a1onJ6NLACDbzjHzBA==",
+		Username: "website",
+		Password: "8biA4kRmOESvlIDN4IM3gqnqFK69xOZHEsQJtgqCRgzhDzFbEj9EdRYVr0pbOd2EEptdPACfjiwHACDbSsHCGQ==",
 	})
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	client, err := mongo.Connect(ctx, clientOptions)
